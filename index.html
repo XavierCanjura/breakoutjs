@@ -229,7 +229,7 @@
 
         // touch paddle
         const isBallSameXAsPaddle = x > paddleX && x < paddleX + paddleWidth;
-        const isBallTouchingPaddle = y + dy > paddleY;
+        const isBallTouchingPaddle = y + dy > paddleY - 1 && y + dy < paddleY + 1;
 
         if(isBallSameXAsPaddle && isBallTouchingPaddle) {
            dy = -dy;  // change ball's direction

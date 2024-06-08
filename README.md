@@ -10,6 +10,7 @@ Creditos a [midudev](https://github.com/midudev)
 * Mejora en las colisiones de los ladrillos
 * Posibilidad de pausar el videojuego con la barra espaciadora
 * Inicio de juego cuando se presiona la barra espaciadora
+* Mejora en las colisiones con el paddle
 
 ## Futuras Mejoras
 * Implementación de pantalla de Game Over
@@ -17,6 +18,4 @@ Creditos a [midudev](https://github.com/midudev)
 * Implementacion de sonidos y efectos
 * Implementación de menú de inicio
 * Implementacion de nuevos niveles
-* Mejora en las colisiones con el paddle
 * Adaptabilidad para Móviles
-* 
