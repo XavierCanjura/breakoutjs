@@ -7,6 +7,7 @@
     <style>
         body{
             background-color: #111;
+            position: relative;
         }
         canvas{
             border: 4px solid #fff;
@@ -15,10 +16,44 @@
             margin: 0 auto;
             display: block;
         }
+        #gameover{
+            width: 100%;
+            position: absolute;
+            top: 0;
+            display: none;
+            justify-content: center;
+        }
+
+        #gameover > div {
+            width: 50%;
+            height: 408px;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        #gameover h2 {
+            color: #fff;
+        }
+
+        #gameover button{
+            width: 100px;
+        }
     </style>
 </head>
 <body>
-    <canvas></canvas>
+    <canvas> </canvas>
+
+    <div id="gameover">
+        <div>
+            <h2>Game Over</h2>
+            <button id="reset" role="button">Reset</button>
+        </div>
+    </div>
+
 
     <img hidden id="sprites" src="./sprite.png" alt="Sprite Arkanoid">
     <img hidden id="bricks" src="./bricks.png" alt="Sprite Arkanoid">
@@ -31,6 +66,8 @@
 
     const $sprites = document.querySelector('#sprites');
     const $bricks = document.querySelector('#bricks');
+    const $reset = document.querySelector('#reset');
+    const $gameoverPanel = document.querySelector('#gameover');
 
     // size canvas
     canvas.width = 448;
@@ -38,6 +75,7 @@
 
     // Variables de nuestro juego
     let hasPause = true;
+    let hasGameOver = false;
 
     // VARIABLES DE LA PELOTA
     const ballRadius = 4;
@@ -237,8 +275,9 @@
 
         // bottom wall - game over
         if(y + dy > canvas.height - ballRadius){
-            console.log('Game Over');
+            // console.log('Game Over');
             // document.location.reload();
+            hasGameOver = true;
         }
 
         if(!hasPause){
@@ -267,8 +306,8 @@
     }
 
     function initEvents() {
-        document.addEventListener('keydown', keyDownHandler)
-        document.addEventListener('keyup', keyUpHandler)
+        document.addEventListener('keydown', keyDownHandler);
+        document.addEventListener('keyup', keyUpHandler);
 
         function keyDownHandler(event) {
             const { key } = event;
@@ -291,12 +330,59 @@
         }
     }
 
+    function showGameOver() {
+        hasGameOver ? $gameoverPanel.style.display = 'flex' : $gameoverPanel.style.display = 'none';
+    }
+
+    function reset(){
+        $reset.addEventListener('click', handleClick);
+
+        function handleClick() {
+            // reset ball position
+            x = canvas.width / 2;
+            y = canvas.height - 30;
+
+            // reset paddle position
+            paddleX = (canvas.width - paddleWidth) / 2;
+            paddleY = canvas.height - paddleHeight - 10;
+
+            // reset pause
+            hasPause = true
+
+            // reset movement
+            dx = 2;
+            dy = -2;
+
+            // reset bricks
+            for(let c = 0; c < bricksColumnCount; c++) {
+                bricks[c] = [];
+                for(let r = 0; r < bricksRowCount; r++){
+                    // calculando la posicion del ladrillo en la pantalla
+                    const brickX = c * (brickWidth + brickPadding) + brickOffsetLeft;
+                    const brickY = r * (brickHeight + brickPadding) + brickOffsetTop;
+
+                    // asignamos un color random
+                    const random = Math.floor(Math.random() * 8);
+
+                    //Guardamos la informacion de cada ladrillo
+                    bricks[c][r] = {
+                        x: brickX,
+                        y: brickY,
+                        status: BRICK_STATUS.ACTIVE,
+                        color: random
+                    }
+                }
+            }
+
+            // hide game over panel
+            hasGameOver = false;
+        }
+    }
 
 
     function draw(){
         clearCanvas();
-
-        // console.log([leftPressed, rightPressed]);
+        reset();
 
         // dibujar los elementos
         drawBall();
@@ -308,6 +394,8 @@
         collisionDetection();
         ballMovement();
         paddleMovement();
+
+        showGameOver();
 
         window.requestAnimationFrame(draw); // se ejecuta antes de cada repintado de pantalla
     }

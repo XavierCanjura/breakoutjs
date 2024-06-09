@@ -11,9 +11,10 @@ Creditos a [midudev](https://github.com/midudev)
 * Posibilidad de pausar el videojuego con la barra espaciadora
 * Inicio de juego cuando se presiona la barra espaciadora
 * Mejora en las colisiones con el paddle
+* Implementación de pantalla de Game Over
 
 ## Futuras Mejoras
-* Implementación de pantalla de Game Over
+* Implementacion de Score y vidas
 * Implementación de ajustes, cambio de dificultad, sensibilidad del paddle
 * Implementacion de sonidos y efectos
 * Implementación de menú de inicio
