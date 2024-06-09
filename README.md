@@ -12,6 +12,7 @@ Creditos a [midudev](https://github.com/midudev)
 * Inicio de juego cuando se presiona la barra espaciadora
 * Mejora en las colisiones con el paddle
 * Implementación de pantalla de Game Over
+* Adaptabilidad para Móviles
 
 ## Futuras Mejoras
 * Implementacion de Score y vidas
@@ -19,4 +20,3 @@ Creditos a [midudev](https://github.com/midudev)
 * Implementacion de sonidos y efectos
 * Implementación de menú de inicio
 * Implementacion de nuevos niveles
-* Adaptabilidad para Móviles
