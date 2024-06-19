@@ -20,3 +20,4 @@ Creditos a [midudev](https://github.com/midudev)
 * Implementacion de sonidos y efectos
 * Implementación de menú de inicio
 * Implementacion de nuevos niveles
+* Implementacion segun donde golpee el paddle asi sera el angulo de salida de la pelota
